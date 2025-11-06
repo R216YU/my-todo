@@ -14,17 +14,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  todos     Todo[]
-  
-  @@map("users")
-}
 
 model Todo {
   id          String   @id @default(cuid())
@@ -36,10 +25,21 @@ model Todo {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tags        Tag[]    @relation("TodoTags")
   
-  @@map("todos")
+  @@map("t_todos")
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  title     String
+  color     String?  // タグの色（オプション）
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  todos     Todo[]   @relation("TodoTags")
+
+  @@map("t_tags")
 }
 
 enum Priority {

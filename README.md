@@ -88,6 +88,84 @@ yarn exec turbo dev --filter=web
 pnpm exec turbo dev --filter=web
 ```
 
+## Database Setup
+
+This project uses PostgreSQL as the database with Prisma as the ORM.
+
+### Prerequisites
+
+- [Docker](https://www.docker.com/get-started) installed and running
+- [Docker Compose](https://docs.docker.com/compose/) (usually included with Docker Desktop)
+
+### Quick Start
+
+1. **Start the PostgreSQL database:**
+
+   ```bash
+   # データベースのみ起動
+   pnpm run db:up
+
+   # または、データベース + pgAdmin（管理ツール）を起動
+   docker-compose up -d
+   ```
+
+2. **データベースマイグレーションの実行:**
+
+   ```bash
+   cd packages/database
+   npx prisma migrate dev
+   ```
+
+3. **Prismaクライアントの生成:**
+   ```bash
+   cd packages/database
+   npx prisma generate
+   ```
+
+### Available Database Commands
+
+- `pnpm run db:up` - PostgreSQLデータベースを起動
+- `pnpm run db:down` - データベースコンテナを停止
+- `pnpm run db:logs` - データベースのログを表示
+- `pnpm run db:reset` - データベースをリセット（全データ削除）
+- `pnpm run pgadmin:up` - pgAdmin（管理ツール）を起動
+- `pnpm run dev:full` - データベース + 全アプリケーションを起動
+
+### Database Access
+
+- **PostgreSQL**: `localhost:5432`
+  - Database: `todo_db`
+  - User: `todo_user`
+  - Password: `todo_password`
+
+- **pgAdmin** (Database Management UI): `http://localhost:8080`
+  - Email: `admin@todo.local`
+  - Password: `admin123`
+
+### Environment Variables
+
+データベース接続情報は `.env` ファイルで設定されています：
+
+```env
+DATABASE_URL="postgresql://todo_user:todo_password@localhost:5432/todo_db"
+```
+
+### Prisma Commands
+
+```bash
+# データベーススキーマの変更を反映
+npx prisma migrate dev
+
+# Prismaクライアントの生成
+npx prisma generate
+
+# データベースの内容を確認
+npx prisma studio
+
+# シードデータの実行
+npx prisma db seed
+```
+
 ### Remote Caching
 
 > [!TIP]
