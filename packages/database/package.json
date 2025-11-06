@@ -22,6 +22,7 @@
     "@prisma/client": "latest"
   },
   "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "latest",
     "dotenv": "latest",
