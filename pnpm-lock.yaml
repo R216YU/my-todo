@@ -23,6 +23,9 @@ importers:
       '@hono/zod-validator':
         specifier: ^0.7.4
         version: 0.7.4(hono@4.10.4)(zod@4.1.12)
+      '@repo/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       hono:
         specifier: ^4.10.4
         version: 4.10.4
@@ -30,9 +33,9 @@ importers:
         specifier: ^4.1.12
         version: 4.1.12
     devDependencies:
-      '@repo/database':
-        specifier: workspace:*
-        version: link:../../packages/database
+      '@hono/node-server':
+        specifier: ^1.19.6
+        version: 1.19.6(hono@4.10.4)
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
@@ -42,12 +45,18 @@ importers:
       '@repo/vitest-config':
         specifier: workspace:*
         version: link:../../packages/vitest-config
+      '@types/node':
+        specifier: ^24.10.0
+        version: 24.10.0
       esbuild:
         specifier: ^0.21.4
         version: 0.21.5
       npm-run-all2:
         specifier: ^6.2.0
         version: 6.2.6
+      tsx:
+        specifier: ^4.20.6
+        version: 4.20.6
       vitest:
         specifier: ^2.1.4
         version: 2.1.9(@types/node@24.10.0)(@vitest/ui@2.1.9)(happy-dom@15.11.7)(jsdom@25.0.1)
@@ -549,6 +558,12 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@hono/node-server@1.19.6':
+    resolution: {integrity: sha512-Shz/KjlIeAhfiuE93NDKVdZ7HdBVLQAfdbaXEaoAVO3ic9ibRSLGIQGkcBbFyuLr+7/1D5ZCINM8B+6IvXeMtw==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: ^4
 
   '@hono/zod-validator@0.7.4':
     resolution: {integrity: sha512-biKGn3BRJVaftZlIPMyK+HCe/UHAjJ6sH0UyXe3+v0OcgVr9xfImDROTJFLtn9e3XEEAHGZIM9U6evu85abm8Q==}
@@ -2736,6 +2751,10 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
+
+  '@hono/node-server@1.19.6(hono@4.10.4)':
+    dependencies:
+      hono: 4.10.4
 
   '@hono/zod-validator@0.7.4(hono@4.10.4)(zod@4.1.12)':
     dependencies:

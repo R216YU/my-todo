@@ -15,26 +15,72 @@ export const getAllTodos = async () => {
  * @returns Todoデータ
  */
 export const getTodoById = async (id: string) => {
-  const todo = await prisma.todo.findUniqueOrThrow({
+  const todo = await prisma.todo.findUnique({
     where: { id },
   });
+
   return todo;
 };
 
-export type CreateTodo = {
-  title: string;
-  description?: string;
-  priority?: Priority;
-  dueDate?: Date;
-};
 /**
  * 新しいTodoを作成する
- * @param data Todoデータ
- * @returns 作成されたTodoデータ
+ * @param title
+ * @param description
+ * @param priority
+ * @param dueDate
  */
-export const createTodo = async (data: CreateTodo) => {
+export const createTodo = async (
+  title: string,
+  description?: string,
+  priority?: Priority,
+  dueDate?: Date
+) => {
   const todo = await prisma.todo.create({
-    data,
+    data: {
+      title,
+      description,
+      priority,
+      dueDate,
+    },
   });
+
   return todo;
+};
+
+/**
+ * ID指定でTodoデータを更新する
+ * @param id
+ * @param title
+ * @param description
+ * @param priority
+ * @param dueDate
+ */
+export const updateTodoById = async (
+  id: string,
+  title?: string,
+  description?: string,
+  priority?: Priority,
+  dueDate?: Date
+) => {
+  const todo = await prisma.todo.update({
+    where: { id },
+    data: {
+      title,
+      description,
+      priority,
+      dueDate,
+    },
+  });
+
+  return todo;
+};
+
+/**
+ * ID指定でTodoデータを削除する
+ * @param id
+ */
+export const deleteTodoById = async (id: string) => {
+  await prisma.todo.delete({
+    where: { id },
+  });
 };
