@@ -2,17 +2,23 @@
   "name": "api",
   "type": "module",
   "scripts": {
+    "dev": "hono dev ./src/index.ts --port 4000",
     "build": "esbuild --bundle --outfile=./dist/index.js --platform=node --target=node20 ./src/index.ts",
     "zip": "zip -j lambda.zip dist/index.js",
     "update": "aws lambda update-function-code --zip-file fileb://lambda.zip --function-name hello",
-    "deploy": "run-s build zip update"
+    "deploy": "run-s build zip update",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@repo/database": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@repo/vitest-config": "workspace:*",
     "esbuild": "^0.21.4",
-    "npm-run-all2": "^6.2.0"
+    "npm-run-all2": "^6.2.0",
+    "vitest": "^2.1.4"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.7.4",
