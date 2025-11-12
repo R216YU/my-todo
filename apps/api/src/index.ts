@@ -6,6 +6,20 @@ import tag from "./features/tag/tag-route";
 
 const app = new Hono();
 
+// CORS設定
+app.use("*", async (c, next) => {
+  c.header("Access-Control-Allow-Origin", "*");
+  c.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  c.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  if (c.req.method === "OPTIONS") {
+    return c.text("OK", 200);
+  }
+  await next();
+});
+
 app.get("/", (c) => {
   return c.json({ success: true, message: "API is working!" });
 });
